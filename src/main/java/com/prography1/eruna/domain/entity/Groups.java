@@ -9,6 +9,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
+@Table(name = "groupsTable")
 public class Groups extends BaseTimeEntity{
 
     @Column(name="group_id")

@@ -37,8 +37,8 @@ public class GroupController {
     @Operation(summary = "그룹 만들기", description = "알람 그룹 만들기")
     @PostMapping("")
     public BaseResponse<CreatedGroup> createGroup(@RequestBody CreateGroup createGroup){
-//        CreatedGroup createdGroup = new CreatedGroup(groupService.createGroup(createGroup));
-        return new BaseResponse<>(groupService.createGroup(createGroup));
+        CreatedGroup createdGroup = groupService.createGroup(createGroup);
+        return new BaseResponse<>(createdGroup);
     }
 
     @Operation(summary = "새 유저 그룹 합류", description = "그룹 링크를 공유받은 유저가 그룹에 참여한다.",
@@ -136,14 +136,14 @@ public class GroupController {
     }
 
     @Operation(summary = "그룹 나가기", description = "그룹 나가기")
-    @DeleteMapping("/{groupId}/exit")
+    @PostMapping("/{groupId}/exit")
     public BaseResponse<String> exitGroup(@PathVariable Long groupId, @RequestBody UUID uuid){
         groupService.exitGroup(groupId, uuid.getUuid());
         return new BaseResponse<>("ok");
     }
 
     @Operation(summary = "그룹 삭제", description = "그룹 삭제")
-    @DeleteMapping("/{groupId}")
+    @PostMapping("/{groupId}/delete")
     public BaseResponse<String> deleteGroup(@PathVariable Long groupId, @RequestBody UUID uuid){
         groupService.deleteGroup(groupId, uuid.getUuid());
         return new BaseResponse<>("ok");
